@@ -60,29 +60,34 @@ class GroceryListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      normal: true;
-    }
+      dog: false
+    };
   }
 
-  onListItemHover() {
+  onListItemClick() {
     this.setState({
-      this.state.normal = !this.state.normal
+      dog: !this.state.dog
     });
-  };
+  }
 
   render() {
-  var style = {
-    textDecoration: this.state.normal ? 'none' : 'bold';
+    var style = {
+      'font-weight': this.state.dog ? 'bold' : 'normal'
+    };
+
+    return (
+      <li style={style} 
+
+        onMouseEnter={this.onListItemClick.bind(this)}
+        onMouseLeave={this.onListItemClick.bind(this)}>{this.props.listItem}</li>
+    );
   };
-  return (
-    <li style={style} onHover={this.onListItemHover.bind(this)}>{this.props.listItem}</li>
-  )};
 };
 
 var GroceryList = (props) => (
   <ul>
     {props.items.map(listItem =>
-      <GroceryListItem listItem = {listItem}/>
+      <GroceryListItem listItem={listItem} />
     )}
   </ul>
 );
